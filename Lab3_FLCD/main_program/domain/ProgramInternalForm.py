@@ -1,12 +1,12 @@
-class PIF:
+class ProgramInternalForm:
     def __init__(self):
         self.__content = []
 
-    def add(self, token, pos):
+    def addToken(self, token, pos):
         self.__content.append((token, pos))
 
     def __str__(self):
         result = ""
         for pair in self.__content:
-            result += '(' + pair[0] + "->" + str(pair[1]) + ')' + "\n"
+            result += 'Token ' + pair[0] + " and Position: " + str(pair[1])  + "\n"
         return result

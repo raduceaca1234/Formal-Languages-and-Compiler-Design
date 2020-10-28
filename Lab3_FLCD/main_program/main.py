@@ -1,13 +1,13 @@
-from main_program.domain.ProgramInternalForm import PIF
+from main_program.domain.ProgramInternalForm import ProgramInternalForm
 from main_program.domain.Scanner import readFile, Scanner, reservedWords, separators, operators
 from main_program.domain.SymbolTable import SymbolTable
 
 
 def main():
     readFile()
-    fileName = "p1.txt"
+    fileName = "data/p1.txt"
     st = SymbolTable(17)
-    pif = PIF()
+    pif = ProgramInternalForm()
     scanner = Scanner()
     exceptionMessage = ""
 
@@ -15,25 +15,25 @@ def main():
         lineCounter = 0
         for line in file:
             lineCounter += 1
-            for token in scanner.tokenize(line.strip()):
+            for token in scanner.tokenizeFunction(line.strip()):
                 if token in reservedWords+separators+operators:
                     if token == ' ':
                         continue
-                    pif.add(token, (0, 0))
-                elif scanner.isIdentifier(token) or scanner.isConstant(token):
+                    pif.addToken(token, (0, 0))
+                elif scanner.checkIfIdentifier(token) or scanner.checkIfConstant(token):
                     id = st.add(token)
-                    pif.add(token, id)
+                    pif.addToken(token, id)
                 else:
                     exceptionMessage += 'Lexical error at token ' + token + ', at line ' + str(lineCounter) + "\n"
 
-    with open('st.out', 'w') as writer:
+    with open('data/st.out', 'w') as writer:
         writer.write(str(st))
 
-    with open('pif.out', 'w') as writer:
+    with open('data/pif.out', 'w') as writer:
         writer.write(str(pif))
 
     if exceptionMessage == '':
-        print("Lexically correct")
+        print("No lexical errors")
     else:
         print(exceptionMessage)
 

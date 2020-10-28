@@ -3,7 +3,7 @@ from collections import deque
 
 class SymbolTable:
 
-    def __init__(self, size) -> None:
+    def __init__(self, size):
         self.__ht = HashTable(size)
 
     def __str__(self) -> str:
@@ -46,8 +46,8 @@ class HashTable:
     def remove(self, key):
         self.__items[self.hash(key)].remove(key)
 
-    def __str__(self) -> str:
-        result = "Symbol Table (kept as a Hash Table using LinkedLists)\n"
+    def __str__(self):
+        result = ""
         for i in range(self.__size):
             result = result + str(i) + "->" + str(self.__items[i]) + "\n"
         return result
@@ -60,4 +60,4 @@ class HashTable:
                 listIndex += 1
             else:
                 break
-        return (listPosition, listIndex)
+        return listPosition, listIndex

@@ -6,7 +6,7 @@ operators = []
 
 
 def readFile():
-    with open('Token.in', 'r') as f:
+    with open('data/Token.in', 'r') as f:
         f.readline()
         for i in range(11):
             separator = f.readline().strip()
@@ -47,7 +47,7 @@ class Scanner:
 
         return token, index
 
-    def tokenize(self, line):
+    def tokenizeFunction(self, line):
         token = ''
         index = 0
         tokens = []
@@ -80,8 +80,8 @@ class Scanner:
             tokens.append(token)
         return tokens
 
-    def isIdentifier(self, token):
+    def checkIfIdentifier(self, token):
         return re.match(r'^[a-z]([a-zA-Z]|[0-9]){,7}', token) is not None
 
-    def isConstant(self, token):
+    def checkIfConstant(self, token):
         return re.match(r'^(0|[+\-]?[1-9][0-9]*)$|^\'.\'$|^\'.*\'$', token) is not None
