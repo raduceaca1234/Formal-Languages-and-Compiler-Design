@@ -1,0 +1,15 @@
+funct{
+number min, n1, n2, n3;
+min = 09;
+cin>>n1;
+cin>>n2;
+cin>>n3;
+min=n1;
+if(n2>mi_n){
+ min=n2;
+}
+if(n3>min){
+ min=n3;
+}
+cout<<min;
+}
