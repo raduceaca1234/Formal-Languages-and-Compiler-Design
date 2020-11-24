@@ -1,18 +1,53 @@
-from domain.SymbolTable import ST
+from domain.parser import Parser
 
-identifiers = ['a', 'b', 'ab', 'ba']
-constants = ['1', '2', '3', '"123"']
-everything = identifiers + constants
-size = 17
 
-st = ST(size)
+def display():
+    print('Press 1 for displaying the entire grammar')
+    print('Press 2 for displaying the non-terminals')
+    print('Press 3 for displaying the terminals')
+    print('Press 4 for displaying start symbol')
+    print('Press 5 for displaying for ALL productions')
+    print('Press 6 for displaying for specific production')
 
-for x in everything:
-    st.add(x)
+    print('Press 0 for exit')
 
-print(st)
 
-assert (st.getPosition('ab') == (14, 0))
-assert (st.getPosition('ba') == (14, 1))
-assert (st.contains('"123"') is True)
-print("Tests passed")
+def main():
+    global inputUser
+    parser = Parser()
+    parser.readFile('g1.txt')
+    try:
+        parser.validateStartingSymbol()
+        parser.validateProductions()
+    except Exception as ex:
+        print(ex)
+        return
+    while True:
+        display()
+        try:
+            inputUser = int(input())
+        except Exception:
+            print('Insert valid number please')
+        if inputUser == 0:
+            break
+        if inputUser == 1:
+            print(parser)
+        if inputUser == 2:
+            print(parser.nonTerminals)
+        if inputUser == 3:
+            print(parser.terminals)
+        if inputUser == 4:
+            print(parser.startingSymbol)
+        if inputUser == 5:
+            for key in parser.productions.keys():
+                print(str(key) + "->" + str(parser.productions[key]))
+        if inputUser == 6:
+            nn = input()
+            try:
+                print(parser.productionsOfNonTerminals(nn))
+            except Exception as ex:
+                print(ex)
+
+
+if __name__ == '__main__':
+    main()
