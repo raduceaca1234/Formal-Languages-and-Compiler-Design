@@ -1,7 +1,7 @@
 from domain.parser import Parser
 
 def show_menu():
-    lr0 = Parser("g0.txt")
+    lr0 = Parser("g1.txt")
 
     print("""
     1 - print terminals

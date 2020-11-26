@@ -1,5 +1,6 @@
 class Parser:
     def __init__(self, file_path):
+        self.dottedproductions = {'S\'': [['.', 'S']]}
         file_program = self.read_program(file_path)
         self.terminals = file_program[0]
         self.nonTerminals = file_program[1]
@@ -122,21 +123,6 @@ class Parser:
             "parent_key": shifted_transition[shifted_transition.index(".") - 1]
         })
 
-    def removeTerminated(self, productions):
-        """will be good later"""
-        initialState = {}
-        for nonTerminal in productions:
-            initialState[nonTerminal] = []
-            for way in productions[nonTerminal]:
-                terminated = True
-                for element in way[1:]:
-                    if element in self.nonTerminals:
-                        terminated = False
-                        break
-                if not terminated:
-                    initialState[nonTerminal].append(way)
-        return initialState
-
     def get_reduced(self):
         self.reduced = {}
         for state in self.states:
@@ -158,7 +144,7 @@ class Parser:
         if message is not None:
             print(deepness + message)
         for key in hashmap:
-            print(f"{deepness}{key} : {hashmap[key]}");
+            print(f"{deepness}{key} : {hashmap[key]}")
 
     def print_data(self, index=-1):
         if index == -1:
