@@ -2,7 +2,7 @@ go{
 number a;
 number b;
 number c;
-b=012;
+b=12;
 a=+2;
 c=-154;
 number bCBCA123;
@@ -23,6 +23,6 @@ max=c;
 }
 cout<<max;
 cout<<"ok";
-cout<<"alex;
+cout<<"radu;
 cout<<'asd';
 }
